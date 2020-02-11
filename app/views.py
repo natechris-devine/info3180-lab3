@@ -6,6 +6,7 @@ This file creates your application.
 """
 
 from app import app
+from forms import ContactForm
 from flask import render_template, request, redirect, url_for, flash
 
 
@@ -24,6 +25,13 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/contact')
+def contact():
+    """Render the website's contact us page"""
+    form  = ContactForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('contact.html')
 
 ###
 # The functions below should be applicable to all Flask apps.
